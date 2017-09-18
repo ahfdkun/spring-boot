@@ -1,6 +1,8 @@
 package com.ahfdkun.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +26,13 @@ public class HelloController {
 	
 	@Value("${student.random.int2}")
 	private int random_int2;
+	
+	@Autowired
+	private CounterService couterService;
 
 	@RequestMapping("/hello")
 	public String hello() {
+		couterService.increment("didispace.hello.count");
 		System.out.println("student.name: " + name);
 		return "Hello World";
 	}
