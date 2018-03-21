@@ -1,13 +1,19 @@
 package com.ahfdkun.web;
 
+import com.ahfdkun.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-	
-	@Value("${student.name}")
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Value("${student.name}")
 	private String name;
 	
 	@Value("#{'abcd'.length()}") // SpEL表达式
@@ -25,9 +31,13 @@ public class HelloController {
 	@Value("${student.random.int2}")
 	private int random_int2;
 
+	@Autowired
+	private UserRepository userRepository;
+
 	@RequestMapping("/hello")
 	public String hello() {
-		System.out.println("student.name: " + name);
+        logger.info("student.name: " + name);
+        logger.info("user : " + userRepository.findAll());
 		return "Hello World";
 	}
 }
