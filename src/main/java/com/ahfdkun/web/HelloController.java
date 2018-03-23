@@ -1,5 +1,7 @@
 package com.ahfdkun.web;
 
+import com.ahfdkun.domain.User;
+import com.ahfdkun.repository.UserRedis;
 import com.ahfdkun.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 @RestController
 public class HelloController {
@@ -34,10 +40,17 @@ public class HelloController {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private UserRedis userRedis;
+
 	@RequestMapping("/hello")
-	public String hello() {
+	public String hello() throws ParseException {
         logger.info("student.name: " + name);
-        logger.info("user : " + userRepository.findAll());
+		logger.info("findByNameAndCreatedate: " + userRepository.findByNameAndCreatedate("user", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2018-03-22 16:31:42")));
+		List<User> users = userRepository.findAll();
+		logger.info("users: " + users);
+		userRedis.add("abc", 100L, users.get(0));
+		logger.info("redis user: "+ userRedis.get("abc"));
 		return "Hello World";
 	}
 }
