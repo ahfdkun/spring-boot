@@ -47,6 +47,7 @@ public class HelloController {
 	public String hello() throws ParseException {
         logger.info("student.name: " + name);
 		logger.info("findByNameAndCreatedate: " + userRepository.findByNameAndCreatedate("user", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2018-03-22 16:31:42")));
+		logger.info("expand JPA: " + userRepository.findOne("user"));
 		List<User> users = userRepository.findAll();
 		logger.info("users: " + users);
 		userRedis.add("abc", 100L, users.get(0));

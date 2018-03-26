@@ -1,6 +1,6 @@
 package com.ahfdkun.config;
 
-import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration;
+import com.ahfdkun.repository.factory.ExpandJpaRepositoryFactoryBean;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 // 启动Spring事务
 @EnableTransactionManagement(proxyTargetClass = true)
 // 启动JPA并指定Repository接口
-@EnableJpaRepositories(basePackages = "com.ahfdkun.repository")
+@EnableJpaRepositories(basePackages = "com.ahfdkun.repository", repositoryFactoryBeanClass = ExpandJpaRepositoryFactoryBean.class)
 @EntityScan(basePackages = "com.ahfdkun.domain")
 public class JPAConfiguration {
 
