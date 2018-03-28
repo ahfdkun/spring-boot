@@ -31,7 +31,7 @@ public class ExpandJpaRepositoryFactoryBean<R extends JpaRepository<T, ID>, T, I
         @Override
         protected SimpleJpaRepository<T, ID> getTargetRepository(RepositoryInformation information) {
             JpaEntityInformation<T, ID> entityInformation = (JpaEntityInformation<T, ID>) getEntityInformation(information.getDomainType());
-            return new ExpandJpaRepositoryImpl<T, ID>(entityInformation, entityManager);
+            return new ExpandJpaRepositoryImpl(entityInformation, entityManager);
         }
 
         protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {

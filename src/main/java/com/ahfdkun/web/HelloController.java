@@ -9,9 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -49,7 +51,10 @@ public class HelloController {
     private RoleService roleService;
 
     @RequestMapping("/hello")
-    public String hello() throws ParseException {
+    public String hello(Principal user) throws ParseException {
+        Authentication authentication = (Authentication)user;
+        logger.info("Authentications: " + authentication.getAuthorities());
+        logger.info("Credentials: " + authentication.getCredentials());
         logger.info("student.name: " + name);
         logger.info("findByNameAndCreatedate: " + userRepository.findByNameAndCreatedate("user", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2018-03-22 16:31:42")));
         logger.info("expand JPA: " + userRepository.findOne("user"));

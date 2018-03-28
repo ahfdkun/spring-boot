@@ -1,5 +1,6 @@
 package com.ahfdkun.hello.test;
 
+import com.ahfdkun.repository.factory.ExpandJpaRepositoryFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -17,7 +18,7 @@ import java.util.Properties;
 
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.ahfdkun.repository")
+@EnableJpaRepositories(basePackages = "com.ahfdkun.repository", repositoryFactoryBeanClass = ExpandJpaRepositoryFactoryBean.class)
 public class JPAConfiguration {
 
     @Bean

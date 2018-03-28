@@ -16,8 +16,12 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String email;
+    private Integer sex;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdate;
+    private String password;
+
     @ManyToOne
     @JoinColumn(name = "did")
     @JsonBackReference
@@ -69,12 +73,39 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", sex=" + sex +
                 ", createdate=" + createdate +
+                ", password='" + password + '\'' +
                 ", department=" + department +
                 ", roles=" + roles +
                 '}';
