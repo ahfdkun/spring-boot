@@ -1,6 +1,5 @@
 package com.ahfdkun;
 
-import com.ahfdkun.web.HelloController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

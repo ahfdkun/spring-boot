@@ -55,6 +55,7 @@ public class HelloController {
         Authentication authentication = (Authentication)user;
         logger.info("Authentications: " + authentication.getAuthorities());
         logger.info("Credentials: " + authentication.getCredentials());
+        logger.info("getPrincipal: " + authentication.getPrincipal());
         logger.info("student.name: " + name);
         logger.info("findByNameAndCreatedate: " + userRepository.findByNameAndCreatedate("user", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2018-03-22 16:31:42")));
         logger.info("expand JPA: " + userRepository.findOne("user"));
